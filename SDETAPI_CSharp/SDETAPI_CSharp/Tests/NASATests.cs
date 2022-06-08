@@ -1,38 +1,44 @@
-﻿using RestSharp;
+﻿using Newtonsoft.Json.Linq;
 using NUnit.Framework;
+using RestSharp;
+
+
 
 namespace SDETAPI_CSharp.Tests;
 
-//First Pull Request
+//Second Pull Request 
+
 public class Program
 {
     [Test]
-    public static void HcgCoreTest()
-    {
-        string fileName =
-            "C:/Users/carlos.martinez/source/repos/SDETAPI_CSharp/SDETAPI_CSharp/Requests/HealthcareGov/Gets/hcgGetRequest.json";
-        (string Method, string Url) data = JsonReader.readJsonFile(fileName);
-
-        IRestResponse response = RestCore.CreateRequestWithHeaders(data.Url, data.Method);
-
-        System.Diagnostics.Debug.WriteLine("\nStatus Code: " + response.StatusCode + "\n" +
-                          "\nContent: " + response.Content);
+    public static void SecondPullHealthCg()
+    {   
+        string fileName = "C:/Users/carlos.martinez/source/repos/SDETAPI_CSharp/SDETAPI_CSharp/Requests/HealthcareGov/Gets/hcgGetRequest.json";
+        var body = JsonReader.readHCGJsonFile(fileName);
+    
+        IRestResponse response = RestCore.CreateRequestWithHeaders(body.Url, body.Method);
+        JObject content = JObject.Parse(response.Content.ToString());
+        
+        Console.WriteLine("\nStatus Code: " + response.StatusCode + "\n" +
+                          "\nContent: " + content);
     }
 
     [Test]
-    public static void NasaCoreTest()
-    {
-        string fileName =
-            "C:/Users/carlos.martinez/source/repos/SDETAPI_CSharp/SDETAPI_CSharp/Requests/NasaOpenAPI/Gets/nasaGetRequest.json";
-        (string Method, string Url) data = JsonReader.readJsonFile(fileName);
-
-        IRestResponse response = RestCore.CreateRequestWithHeaders(data.Url, data.Method);
+    public static void SecondPullNasaOpenApi()
+    {   
+        string fileName = "C:/Users/carlos.martinez/source/repos/SDETAPI_CSharp/SDETAPI_CSharp/Requests/NasaOpenAPI/Gets/nasaGetRequest.json";
+        var body = JsonReader.readNasaJsonFile(fileName);
+    
+        IRestResponse response = RestCore.CreateRequestWithHeaders(body.Url, body.Method);
+        JObject content = JObject.Parse(response.Content.ToString());
+        
         if (!string.Equals(response.StatusCode.ToString(), "Ok", StringComparison.OrdinalIgnoreCase))
-            System.Diagnostics.Debug.WriteLine("\nError: " + response.ErrorMessage);
-        else
-        {
-            System.Diagnostics.Debug.WriteLine("\nStatus Code: " + response.StatusCode + "\n" +
-                              "\nContent: " + response.Content);
+            Console.WriteLine("\nError: "+ response.ErrorMessage);
+        else {
+            Console.WriteLine("\nStatus Code: " + response.StatusCode + "\n" +
+                              "\nContent: " + content);
         }
+        
+        
     }
 }

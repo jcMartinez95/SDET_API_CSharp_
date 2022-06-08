@@ -32,20 +32,20 @@ public class RestCore
                                                   $"Current valid types: Get and Post");
         }
         restRequest.RequestFormat = DataFormat.Json;
-        IRestResponse response = AddRequestBody(restRequest);
+        IRestResponse response = AddRequestBody(restRequest, methodType);
         return response;
     }
 
-    public static IRestResponse AddRequestBody(RestRequest restRequest)
+    public static IRestResponse AddRequestBody(RestRequest restRequest, string methodType)
     {
         RestClient restClient = new RestClient();
         restRequest.AddParameter("application/json; charset=utf-8", ParameterType.RequestBody);
-        IRestResponse serviceReponse = restClient.Execute(restRequest);
-
-        return serviceReponse;
+        IRestResponse serviceResponse = restClient.Execute(restRequest);
+        Console.Write("\nStatus Code Num: " + (int)serviceResponse.StatusCode);
+        
+        return serviceResponse;
         
         
     }
-    
     
 }
