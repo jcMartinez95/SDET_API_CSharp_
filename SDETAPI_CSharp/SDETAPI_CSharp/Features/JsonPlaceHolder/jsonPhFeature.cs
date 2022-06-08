@@ -1,4 +1,4 @@
-﻿namespace JsonPlaceHolder;
+﻿namespace SDETAPI_CSharp.Features.JsonPlaceHolder;
 
 public class jsonPhFeature
 {
