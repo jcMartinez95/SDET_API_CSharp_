@@ -1,11 +1,10 @@
-﻿
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using SDETAPI_CSharp.Features.HealthCareGov;
 using SDETAPI_CSharp.Features.NasaOpenAPI;
 
-namespace SDETAPI_CSharp;
+namespace JsonReader;
 
-public class JsonReader
+public class JsonReaderProgram
 {
 
     public static nasaFeature readNasaJsonFile(string fileName)
@@ -16,8 +15,8 @@ public class JsonReader
             nasaFeature nasafeatureData = JsonConvert.DeserializeObject<nasaFeature>(jsonString);
         var nasaBody = new nasaFeature { Url = nasafeatureData.Url,
             Method = nasafeatureData.Method,
-            status = nasafeatureData.status,
-            statusCode = nasafeatureData.statusCode
+            Status = nasafeatureData.Status,
+            StatusCode = nasafeatureData.StatusCode
         };
         return nasaBody;
     }
@@ -28,10 +27,11 @@ public class JsonReader
         using (StreamReader r = new StreamReader(fileName)) 
             jsonString = r.ReadToEnd();
             hcFeature hcfeatureData = JsonConvert.DeserializeObject<hcFeature>(jsonString);
-            var hcBody = new hcFeature { Url = hcfeatureData.Url,
-            Method = hcfeatureData.Method
+        var hcBody = new hcFeature { Url = hcfeatureData.Url,
+            Method = hcfeatureData.Method,
+            Status = hcfeatureData.Status,
+            StatusCode = hcfeatureData.StatusCode
         };
-         return hcBody;
+        return hcBody;
     }
-
 }

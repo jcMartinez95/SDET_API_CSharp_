@@ -8,7 +8,7 @@ public class RestCore
 {
     private static RestRequest? restRequest;
 
-    public static IRestResponse CreateRequestWithStatus(string Url, string methodType, string status, int statusCode)
+   public static IRestResponse CreateRequestWithStatus(string Url, string methodType, string status, int statusCode)
     {
         switch (methodType.ToUpper())
         {
@@ -33,11 +33,11 @@ public class RestCore
                                                   $"Current valid types: Get and Post");
         }
         restRequest.RequestFormat = DataFormat.Json;
-        IRestResponse response = AddGETRequestBodyWithStatus(restRequest, methodType, status, statusCode);
+        IRestResponse response = AddGETRequestBodyWithStatus(restRequest, status, statusCode);
         return response;
     }
     
-    public static IRestResponse AddGETRequestBodyWithStatus(RestRequest restRequest, string methodType, string status, int statusCode)
+    public static IRestResponse AddGETRequestBodyWithStatus(RestRequest restRequest, string status, int statusCode)
     {
         RestClient restClient = new RestClient();
         restRequest.AddParameter("application/json; charset=utf-8", ParameterType.RequestBody);
