@@ -1,0 +1,10 @@
+﻿{
+  "id": "Post",
+  "Url": "https://jsonplaceholder.typicode.com/posts",
+  "name": "Carlos",
+  "lastName": "Martinez",
+  "Method": "post",
+  "featureType": "jsonPhFeature",
+  "Status": "Created",
+  "StatusCode": "201"
+ }

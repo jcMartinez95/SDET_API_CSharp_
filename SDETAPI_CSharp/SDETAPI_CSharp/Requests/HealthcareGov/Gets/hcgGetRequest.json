@@ -1,0 +1,4 @@
+{
+  "Method": "Get",
+  "Url": "https://www.healthcare.gov/api/articles.json"
+}
