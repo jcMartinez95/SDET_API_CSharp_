@@ -1,4 +1,5 @@
 ﻿using RestSharp;
+using NUnit.Framework;
 
 namespace SDETAPI_CSharp;
 
@@ -7,7 +8,7 @@ public class RestCore
 {
     private static RestRequest? restRequest;
 
-    public static IRestResponse CreateRequestWithHeaders(string Url, string methodType)
+    public static IRestResponse CreateRequestWithStatus(string Url, string methodType, string status, int statusCode)
     {
         switch (methodType.ToUpper())
         {
@@ -32,20 +33,29 @@ public class RestCore
                                                   $"Current valid types: Get and Post");
         }
         restRequest.RequestFormat = DataFormat.Json;
-        IRestResponse response = AddRequestBody(restRequest, methodType);
+        IRestResponse response = AddGETRequestBodyWithStatus(restRequest, methodType, status, statusCode);
         return response;
     }
-
-    public static IRestResponse AddRequestBody(RestRequest restRequest, string methodType)
+    
+    public static IRestResponse AddGETRequestBodyWithStatus(RestRequest restRequest, string methodType, string status, int statusCode)
     {
         RestClient restClient = new RestClient();
         restRequest.AddParameter("application/json; charset=utf-8", ParameterType.RequestBody);
         IRestResponse serviceResponse = restClient.Execute(restRequest);
+        
+        if (!string.Equals(serviceResponse.StatusCode.ToString(), status.ToUpper(), StringComparison.OrdinalIgnoreCase))
+            Console.WriteLine("\nError: "+ serviceResponse.ErrorMessage);
+        
+        Assert.AreEqual(serviceResponse.StatusCode.ToString(), (status.ToUpper()));
+        Assert.That((int)serviceResponse.StatusCode, Is.EqualTo(statusCode));
+        
+        Console.Write("\nStatus Code: " + serviceResponse.StatusCode);
         Console.Write("\nStatus Code Num: " + (int)serviceResponse.StatusCode);
         
         return serviceResponse;
         
         
     }
+    
     
 }

@@ -25,15 +25,13 @@ public class JsonReader
     public static hcFeature readHCGJsonFile(string fileName)
     {
         string jsonString;
-        using (StreamReader r = new StreamReader(fileName))
+        using (StreamReader r = new StreamReader(fileName)) 
             jsonString = r.ReadToEnd();
-        hcFeature hcfeatureData = JsonConvert.DeserializeObject<hcFeature>(jsonString);
-        var hcBody = new hcFeature
-        {
-            Url = hcfeatureData.Url,
+            hcFeature hcfeatureData = JsonConvert.DeserializeObject<hcFeature>(jsonString);
+            var hcBody = new hcFeature { Url = hcfeatureData.Url,
             Method = hcfeatureData.Method
         };
-        return hcBody;
+         return hcBody;
     }
 
 }

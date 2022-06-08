@@ -7,6 +7,6 @@ public class nasaFeature
 
     public string status { get; set; }
     
-    public string statusCode { get; set; }  
+    public int statusCode { get; set; }  
 
 }
