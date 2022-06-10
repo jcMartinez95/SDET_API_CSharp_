@@ -2,5 +2,5 @@
   "Method": "Get",
   "Url": "https://www.healthcare.gov/api/topics.json",
   "Status": "Ok",
-  "StatusCode": "200"
+  "StatusCode": 200
 }
