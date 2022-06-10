@@ -1,4 +1,6 @@
 {
   "Method": "Get",
-  "Url": "https://www.healthcare.gov/api/articles.json"
+  "Url": "https://www.healthcare.gov/api/topics.json",
+  "Status": "Ok",
+  "StatusCode": "200"
 }
